@@ -39,8 +39,18 @@ class User extends Model {
         }
       }
     }, {
-      sequelize
+      sequelize,
+      tableName: 'users'
     })
+  }
+  static associate(models) {
+    this.hasMany(
+        models.UserRole,
+        {
+            foreignKey: 'user_id',
+            as: 'user'
+        }
+    );
   }
 }
 export default User

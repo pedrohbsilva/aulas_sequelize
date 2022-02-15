@@ -4,7 +4,9 @@ import {Op} from 'sequelize'
 class UserController {
   async index(req, res) {
 
-    const users = await User.findAll()
+    const users = await User.findAll({
+      attributes: ['name', 'email']
+    })
 
     return res.status(200).json({ users: users })
   }
