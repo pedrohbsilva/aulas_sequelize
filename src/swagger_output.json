@@ -23,27 +23,19 @@
         "description": "",
         "parameters": [
           {
-            "name": "obj",
+            "name": "body",
             "in": "body",
-            "description": "O endpoint cria um novo usuário para a aplicação.",
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string",
-                  "example": "Jhon Doe"
+                  "example": "any"
                 },
-                "age": {
-                  "type": "number",
-                  "example": 29
+                "password": {
+                  "example": "any"
                 },
-                "job": {
-                  "type": "string",
-                  "example": "Developer"
-                },
-                "state": {
-                  "type": "string",
-                  "example": "Santa Catarina"
+                "email": {
+                  "example": "any"
                 }
               }
             }
@@ -64,6 +56,36 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/session": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
