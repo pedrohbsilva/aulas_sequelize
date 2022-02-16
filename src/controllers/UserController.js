@@ -7,7 +7,7 @@ class UserController {
     const users = await User.findAll({
       attributes: ['name', 'email']
     })
-
+    
     return res.status(200).json({ users: users })
   }
 
