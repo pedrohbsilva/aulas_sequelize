@@ -8,7 +8,7 @@ function auth(req, res, next){
     }
     try {
         verify(authorization, process.env.SECRET)
-
+        
         next()
 
     } catch (error) {

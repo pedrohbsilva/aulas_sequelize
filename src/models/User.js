@@ -48,7 +48,7 @@ class User extends Model {
         models.UserRole,
         {
             foreignKey: 'user_id',
-            as: 'user'
+            as: 'roles'
         }
     );
   }

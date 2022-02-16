@@ -2,12 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 
 class UserRole extends Model {
     static init(sequelize) {
-        super.init({
-            description: {
-                type: DataTypes.STRING,
-                allowNull: false
-            }
-        }, {
+        super.init({}, {
             sequelize,
             tableName: 'users_roles'
         })
@@ -15,8 +10,8 @@ class UserRole extends Model {
     static associate(models) {
         this.belongsTo(
             models.Role, {
-            foreignKey: 'role_id', // Qual chave estrangeira dentro de Posts que representa o usuario
-            as: 'role' // nome do relacionamento
+            foreignKey: 'role_id',
+            as: 'role'
         });
         this.belongsTo(
             models.User, {

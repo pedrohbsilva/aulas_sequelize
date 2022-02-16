@@ -26,17 +26,18 @@ class RoleController {
     async index(req, res){
         try {
             const roles = await Role.findAll({
+                attributes: ['description'],
                 include: { 
-                    model: PermissionRole, 
-                    as: 'roles'
+                    separate: true,
+                    association: 'roles',
+                    attributes: ['permission_id']
                 }
             })
         
             return res.status(200).send({records: roles})
         } catch (error) {
             console.log(error)
-            const [err] = error.errors
-            return res.status(400).send({message: err.message})
+            return 
         }
     }
 }

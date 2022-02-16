@@ -5,7 +5,10 @@ class Permission extends Model {
         super.init({
             description: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: {
+                    msg: 'A permissão deve ser única'
+                }
             }
         }, {
             sequelize,

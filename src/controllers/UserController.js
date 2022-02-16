@@ -1,11 +1,16 @@
 import User from '../models/User'
 import { sign } from 'jsonwebtoken'
 import {Op} from 'sequelize'
+import UserRole from '../models/UserRole'
 class UserController {
   async index(req, res) {
 
     const users = await User.findAll({
-      attributes: ['name', 'email']
+      attributes: ['name', 'email'],
+      include: {
+        model: UserRole,
+        as: 'roles'
+      }
     })
     
     return res.status(200).json({ users: users })
@@ -14,11 +19,26 @@ class UserController {
   async create(req, res) {
     try {
       const { name, password, email } = req.body;
-      await User.create({name, password, email})
+      const roles = [1,2]
+      await User.create(
+        {
+          name, 
+          password, 
+          email,
+          roles: roles.map((item) => {
+            return { role_id: item}
+          })
+        },{
+          include: {
+            model: UserRole,
+            as: 'roles'
+          }, 
+       })
   
       return res.status(201).send({ message: 'Usuário salvo com sucesso.' })
       
     } catch (error) {
+      console.log(error)
       const [err] = error.errors
       return res.status(400).send({ message: err.message })
     }
