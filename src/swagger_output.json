@@ -11,8 +11,8 @@
     "http"
   ],
   "securityDefinitions": {
-    "api_key": {
-      "type": "bearer",
+    "bearerAuth": {
+      "type": "apiKey",
       "name": "authorization",
       "in": "header"
     }
@@ -35,6 +35,9 @@
                   "example": "any"
                 },
                 "email": {
+                  "example": "any"
+                },
+                "roles": {
                   "example": "any"
                 }
               }
@@ -164,9 +167,17 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
 }

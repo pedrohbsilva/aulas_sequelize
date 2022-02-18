@@ -10,12 +10,17 @@ const doc = {
     },
     host: process.env.HOST || 'localhost:3333',
     securityDefinitions: {
-        api_key: {
+        bearerAuth: {
           type: 'apiKey',
           name: 'authorization',
           in: 'header',
         }
-    }
+    },
+    security: [
+      {
+        bearerAuth: []
+      }
+    ]
 };
 
 swaggerAutogen(outputFile , endpointsFiles, doc)

@@ -1,6 +1,6 @@
 import Role from '../models/Role';
 import PermissionRole from '../models/PermissionRole';
-import Permission from '../models/Permission';
+import PermissionService from '../services/permission.service'
 
 class RoleController {
     async create(req, res){
@@ -17,7 +17,6 @@ class RoleController {
 
             return res.status(200).send({message: 'Cargo criado com sucesso.'})
         } catch (error) {
-            console.log(error)
             const [err] = error.errors
             return res.status(400).send({message: err.message})
         }
@@ -28,16 +27,29 @@ class RoleController {
             const roles = await Role.findAll({
                 attributes: ['description'],
                 include: { 
-                    separate: true,
-                    association: 'roles',
-                    attributes: ['permission_id']
+                    model: PermissionRole, 
+                    as: 'roles'
                 }
             })
-        
-            return res.status(200).send({records: roles})
+            
+            const rolesWithPermission = await Promise.all(roles.map(async({
+                description,
+                roles
+            }) => {
+                return {
+                    description,
+                    permissions: await Promise.all(roles.map(async({
+                        permission_id
+                    }) => {
+                        const permission = await PermissionService.getByPermissionId(permission_id)
+                        return permission
+                    }))
+                }
+            }))
+            return res.status(200).send({records: rolesWithPermission})
         } catch (error) {
-            console.log(error)
-            return 
+            const [err] = error.errors
+            return res.status(400).send({message: err.message})
         }
     }
 }

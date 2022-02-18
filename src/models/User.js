@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-
+import bcrypt from 'bcrypt'
 class User extends Model {
   static init(sequelize) {
     super.init({
@@ -40,7 +40,12 @@ class User extends Model {
       }
     }, {
       sequelize,
-      tableName: 'users'
+      tableName: 'users',
+      hooks: {
+        beforeCreate: (user) => {
+          user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8))
+        }
+      }
     })
   }
   static associate(models) {
