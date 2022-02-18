@@ -9,7 +9,7 @@
 
 <a id="tech"></a>
 
-Este repositório foi criado para demonstrar como funciona o conceito de Role Based Control Access para os alunos do curso DEVinHouse.
+Este repositório foi criado para demonstrar como funciona o conceito de Role Based Access Control para os alunos do curso DEVinHouse.
 ## Tecnologias
 
 O projeto desenvolvido utiliza as seguintes tecnologias:
