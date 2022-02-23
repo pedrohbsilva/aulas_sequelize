@@ -6,9 +6,9 @@ module.exports = {
       'users',
       {
         id: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.UUID,
           allowNull: false,
-          autoIncrement: true,
+          default: Sequelize.fn('uuid'),
           primaryKey: true,
         },
         name: {

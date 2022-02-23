@@ -4,6 +4,9 @@ import PermissionService from '../services/permission.service'
 
 class RoleController {
     async create(req, res){
+        /*
+            #swagger.tags = ['role']
+        */
         try {
             const { description, permissions } = req.body
             const response = await Role.create({description})
@@ -23,6 +26,9 @@ class RoleController {
     }
 
     async index(req, res){
+                /*
+            #swagger.tags = ['role']
+        */
         try {
             const roles = await Role.findAll({
                 attributes: ['description'],
@@ -48,6 +54,7 @@ class RoleController {
             }))
             return res.status(200).send({records: rolesWithPermission})
         } catch (error) {
+            console.log(error)
             const [err] = error.errors
             return res.status(400).send({message: err.message})
         }

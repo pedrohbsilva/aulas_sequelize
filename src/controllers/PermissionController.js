@@ -2,6 +2,9 @@ import Permission from '../models/Permission';
 
 class PermissionController {
     async create(req, res){
+        /*
+            #swagger.tags = ['permission']
+        */
         try {
             const { description } = req.body
             await Permission.create({description})
@@ -13,6 +16,9 @@ class PermissionController {
         }
     }
     async index(req, res){
+        /*
+            #swagger.tags = ['permission']
+        */
         try {
             const permissions = await Permission.findAll({
                 attributes: ['id', 'description']

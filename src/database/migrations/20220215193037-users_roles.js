@@ -6,19 +6,19 @@ module.exports = {
       'users_roles', 
       {
         id: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.UUID,
           allowNull: false,
-          autoIncrement: true,
+          default: Sequelize.fn('uuid'),
           primaryKey: true,
         },
         user_id: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.UUID,
           references: {model: 'users', key: 'id'},
           onUpdate: 'CASCADE',
           allowNull: false
         },
         role_id: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.UUID,
           references: {model: 'roles', key: 'id'},
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',

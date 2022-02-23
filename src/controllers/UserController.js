@@ -6,7 +6,9 @@ import RoleService from '../services/role.service'
 import bcrypt from 'bcrypt'
 class UserController {
   async index(req, res) {
-
+    /*
+      #swagger.tags = ['user']
+    */
     const users = await User.findAll({
       attributes: ['name', 'email'],
       include: {
@@ -31,6 +33,9 @@ class UserController {
   }
 
   async create(req, res) {
+    /*
+      #swagger.tags = ['user']
+    */
     try {
       const { name, password, email, roles } = req.body;
       await User.create({
@@ -49,12 +54,16 @@ class UserController {
       return res.status(201).send({ message: 'Usuário salvo com sucesso.' })
       
     } catch (error) {
+      console.log(error)
       const [err] = error.errors
       return res.status(400).send({ message: err.message })
     }
   }
   
   async session(req, res) {
+    /*
+      #swagger.tags = ['user']
+    */
     try {
       const { email, password } = req.body;
 

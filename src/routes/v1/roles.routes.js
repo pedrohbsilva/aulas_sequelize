@@ -4,7 +4,7 @@ import { can } from '../../middlewares/auth';
 
 const rolesRoutes = new Router();
 
-rolesRoutes.post('/roles', can(['PERMISSION_WRITE']), RoleController.create);
+rolesRoutes.post('/roles', RoleController.create);
 rolesRoutes.get('/roles', RoleController.index);
 
 export default rolesRoutes;

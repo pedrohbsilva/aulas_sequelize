@@ -8,12 +8,12 @@ async function auth(req){
         if(!authorization){
             throw Error
         }
-        const user = verify(authorization, process.env.SECRET)
+        const user = verify(authorization)
         
         return user
 
     } catch (error) {
-        return {message: "Você não tem autorização para este recurso."}
+        return { message: "Você não tem autorização para este recurso." }
     }
 }
 
@@ -23,10 +23,11 @@ function can(permissions){
         if(user.message){
             return res.status(401).send({message: user.message})
         }
+
         const roles = await PermissionRole.findAll({
             where: {
                 role_id: user.roles.map((role)=>role.role_id)
-            },
+            }, 
             attributes: ['permission_id'],
             include: {
                 association: 'permission',

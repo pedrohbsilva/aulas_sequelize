@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-
+import { v4 as uuidv4 } from 'uuid';
 class Permission extends Model {
     static init(sequelize) {
         super.init({
@@ -12,7 +12,12 @@ class Permission extends Model {
             }
         }, {
             sequelize,
-            tableName: 'permissions'
+            tableName: 'permissions',
+            hooks: {
+                beforeCreate: (permission) => {
+                  permission.id = uuidv4()
+                }
+              }
         })
     }
     static associate(models) {

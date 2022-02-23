@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt'
+import { v4 as uuidv4 } from 'uuid';
 class User extends Model {
   static init(sequelize) {
     super.init({
@@ -43,7 +44,8 @@ class User extends Model {
       tableName: 'users',
       hooks: {
         beforeCreate: (user) => {
-          user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8))
+          user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8));
+          user.id = uuidv4();
         }
       }
     })

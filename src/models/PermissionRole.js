@@ -1,11 +1,17 @@
 import { Model, DataTypes } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
 
 class PermissionRole extends Model {
     static init(sequelize) {
         super.init({
         }, {
             sequelize,
-            tableName: 'permissions_roles'
+            tableName: 'permissions_roles',
+            hooks: {
+                beforeCreate: (permissionRole) => {
+                    permissionRole.id = uuidv4()
+                }
+              }
         })
     }
 

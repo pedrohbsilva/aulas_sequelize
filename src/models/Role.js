@@ -1,4 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
+import { v4 as uuidv4 } from 'uuid';
 
 class Role extends Model {
   static init(sequelize) {
@@ -9,7 +10,12 @@ class Role extends Model {
       }
     }, {
       sequelize,
-      tableName: 'roles'
+      tableName: 'roles',
+      hooks: {
+        beforeCreate: (role) => {
+            role.id = uuidv4()
+        }
+      }
     })
   }
   static associate(models) {
