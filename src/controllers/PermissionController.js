@@ -1,6 +1,6 @@
-import Permission from '../models/Permission';
+const Permission = require('../models/Permission');
 
-class PermissionController {
+module.exports = {
     async create(req, res){
         /*
             #swagger.tags = ['permission']
@@ -14,7 +14,7 @@ class PermissionController {
             const [err] = error.errors
             return res.status(400).send({message: err.message})
         }
-    }
+    },
     async index(req, res){
         /*
             #swagger.tags = ['permission']
@@ -31,5 +31,3 @@ class PermissionController {
         }
     }
 }
-
-export default new PermissionController()

@@ -1,10 +1,8 @@
-import { Router } from 'express';
-import PermissionController from '../../controllers/PermissionController';
-import { can } from '../../middlewares/auth';
+const PermissionController = require('../../controllers/PermissionController');
+const express = require('express')
+const permissionRoutes = express.Router()
 
-const permissionRoutes = new Router();
-
-permissionRoutes.post('/permissions', PermissionController.create);
 permissionRoutes.get('/permissions', PermissionController.index);
+permissionRoutes.post('/permissions', PermissionController.create);
 
-export default permissionRoutes;
+module.exports = permissionRoutes

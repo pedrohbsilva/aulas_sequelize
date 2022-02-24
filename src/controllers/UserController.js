@@ -1,10 +1,11 @@
-import User from '../models/User'
-import { sign } from 'jsonwebtoken'
-import {Op} from 'sequelize'
-import UserRole from '../models/UserRole'
-import RoleService from '../services/role.service'
-import bcrypt from 'bcrypt'
-class UserController {
+const User = require('../models/User')
+const { sign } = require('jsonwebtoken')
+const {Op} = require('sequelize')
+const UserRole = require('../models/UserRole')
+const RoleService = require('../services/role.service')
+const bcrypt = require('bcrypt')
+
+module.exports = {
   async index(req, res) {
     /*
       #swagger.tags = ['user']
@@ -30,7 +31,7 @@ class UserController {
     }))
     
     return res.status(200).json({ users: usersWithRoles })
-  }
+  },
 
   async create(req, res) {
     /*
@@ -58,7 +59,7 @@ class UserController {
       const [err] = error.errors
       return res.status(400).send({ message: err.message })
     }
-  }
+  },
   
   async session(req, res) {
     /*
@@ -99,5 +100,3 @@ class UserController {
     }
   }
 }
-
-export default new UserController()

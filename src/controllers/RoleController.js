@@ -1,8 +1,8 @@
-import Role from '../models/Role';
-import PermissionRole from '../models/PermissionRole';
-import PermissionService from '../services/permission.service'
+const Role = require('../models/Role');
+const PermissionRole = require('../models/PermissionRole');
+const PermissionService = require('../services/permission.service')
 
-class RoleController {
+module.exports = {
     async create(req, res){
         /*
             #swagger.tags = ['role']
@@ -20,11 +20,11 @@ class RoleController {
 
             return res.status(200).send({message: 'Cargo criado com sucesso.'})
         } catch (error) {
+            console.log(error)
             const [err] = error.errors
             return res.status(400).send({message: err.message})
         }
-    }
-
+    },
     async index(req, res){
                 /*
             #swagger.tags = ['role']
@@ -60,5 +60,3 @@ class RoleController {
         }
     }
 }
-
-export default new RoleController()

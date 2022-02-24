@@ -1,14 +1,13 @@
-import { Router } from 'express';
-import swaggerUi from 'swagger-ui-express';
-import * as swaggerFile from '../swagger_output.json';
+const express = require('express')
+const routes = express.Router()
 
-import usersRoutes from './v1/users.routes';
-import permissionRoutes from './v1/permissions.routes';
-import rolesRoutes from './v1/roles.routes';
-
-const routes = new Router();
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('../swagger_output.json');
+const permissionRoutes = require('./v1/permissions.routes');
+const rolesRoutes = require('./v1/roles.routes');
+const userRoutes = require('./v1/users.routes');
 
 routes.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-routes.use('/api', [usersRoutes, permissionRoutes, rolesRoutes])
+routes.use('/api', [userRoutes, rolesRoutes,permissionRoutes])
 
-export default routes;
+module.exports = routes
